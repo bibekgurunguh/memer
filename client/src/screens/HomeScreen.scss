@@ -1,0 +1,14 @@
+.homeContainer {
+  display: flex;
+  flex: 1;
+}
+
+.homeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
+  flex-shrink: 1;
+}

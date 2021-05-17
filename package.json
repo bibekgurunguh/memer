@@ -1,0 +1,13 @@
+{
+  "name": "memer",
+  "version": "1.0.0",
+  "description": "Easy meme creator",
+  "main": "index.js",
+  "repository": "https://github.com/bibekgurunguh/memer",
+  "author": "Bibek <bibekgurunguh@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd client; yarn start",
+    "install": "cd client; yarn"
+  }
+}

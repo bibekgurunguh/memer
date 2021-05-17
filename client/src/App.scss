@@ -1,0 +1,18 @@
+$lightgrey: #e7ecef;
+$darkblue: #274c77;
+$blue: #6096ba;
+$lightblue: #a3cef1;
+$grey: #8b8c89;
+
+.App {
+  font-family: 'Roboto', sans-serif;
+  background-color: $lightgrey;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
