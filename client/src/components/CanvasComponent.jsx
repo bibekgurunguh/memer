@@ -14,8 +14,8 @@ function Canvas() {
 
   const handleDragStop = (e, draggedElement, index) => {
     const newLayers = [...canvas.layers];
-    newLayers[index].x += draggedElement.x;
-    newLayers[index].y += draggedElement.y;
+    newLayers[index].x = draggedElement.x;
+    newLayers[index].y = draggedElement.y;
     setCanvas({ ...canvas, layers: newLayers });
   };
 
