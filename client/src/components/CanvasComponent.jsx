@@ -7,10 +7,17 @@ import { CanvasContext } from '../contexts/CanvasContext';
 import Element from './ElementComponent';
 
 function Canvas() {
-  const [canvas] = useContext(CanvasContext);
+  const [canvas, setCanvas] = useContext(CanvasContext);
   useEffect(() => {
     console.log(canvas);
   });
+
+  const handleDragStop = (e, draggedElement, index) => {
+    const newLayers = [...canvas.layers];
+    newLayers[index].x += draggedElement.x;
+    newLayers[index].y += draggedElement.y;
+    setCanvas({ ...canvas, layers: newLayers });
+  };
 
   return (
     <div className="canvasContainer">
@@ -28,11 +35,21 @@ function Canvas() {
         }}
       >
         {canvas.layers.length &&
-          canvas.layers.map((layer, i) => (
-            <Draggable bounds=".canvas">
+          canvas.layers.reverse().map((layer, i) => (
+            <Draggable
+              bounds=".canvas"
+              position={{ x: layer.x, y: layer.y }}
+              onStop={(e, draggedElement) =>
+                handleDragStop(e, draggedElement, i)
+              }
+            >
               <div
                 id={`layer${i}`}
-                style={{ display: 'inline-block', position: 'absolute' }}
+                style={{
+                  display: 'inline-block',
+                  position: 'absolute',
+                  zIndex: i,
+                }}
               >
                 <Element type={layer.type} content={layer.content} />
               </div>

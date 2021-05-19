@@ -8,7 +8,6 @@ function TextLayer({ content, index }) {
   const [canvas, setCanvas] = useContext(CanvasContext);
 
   const textChange = (str) => {
-    console.log('layer: ', index);
     const newLayers = [...canvas.layers];
     newLayers[index].content.value = str;
     setCanvas({
