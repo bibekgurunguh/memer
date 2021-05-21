@@ -3,9 +3,17 @@
 }
 
 .canvas {
-  // height: 500px;
-  // width: 750px;
+  position: relative;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+
+  &__element {
+    display: inline-block;
+    position: absolute;
+    &:hover {
+      cursor: move;
+      border: 2px green dotted;
+    }
+  }
 }

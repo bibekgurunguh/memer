@@ -25,7 +25,6 @@ function Canvas() {
         className="canvas"
         elevation={10}
         style={{
-          position: 'relative',
           backgroundColor: canvas.background.color,
           borderWidth: canvas.background.border,
           borderColor: canvas.background.borderColor,
@@ -35,7 +34,7 @@ function Canvas() {
         }}
       >
         {canvas.layers.length &&
-          canvas.layers.reverse().map((layer, i) => (
+          canvas.layers.map((layer, i) => (
             <Draggable
               bounds=".canvas"
               position={{ x: layer.x, y: layer.y }}
@@ -45,11 +44,8 @@ function Canvas() {
             >
               <div
                 id={`layer${i}`}
-                style={{
-                  display: 'inline-block',
-                  position: 'absolute',
-                  zIndex: i,
-                }}
+                className="canvas__element"
+                style={{ zIndex: canvas.layers.length - i }}
               >
                 <Element type={layer.type} content={layer.content} />
               </div>

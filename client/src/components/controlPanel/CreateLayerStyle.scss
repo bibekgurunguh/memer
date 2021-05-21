@@ -1,0 +1,37 @@
+@import '../../constants/globalStyles.scss';
+
+.createLayerContainer {
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgb(165, 163, 255);
+  padding: 10px;
+}
+
+.createButtons {
+  @include flexCenter();
+  position: relative;
+  margin: 0 10px;
+  background-color: rgb(233, 233, 233);
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 10px grey;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 10px lightgrey;
+    transform: scale(1.1);
+  }
+}
+
+.createButtons__badge {
+  @include flexCenter();
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background-color: rgb(47, 47, 226);
+  color: white;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+}

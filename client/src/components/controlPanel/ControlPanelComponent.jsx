@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Grow } from '@material-ui/core';
 
 import './ControlPanelStyle.scss';
 import { CanvasContext } from '../../contexts/CanvasContext';
@@ -49,19 +50,23 @@ function ControlPanel() {
   return (
     <div className="controlPanelContainer">
       <BackgroundLayer />
+      <CreateLayer />
       {canvas.layers.length &&
         canvas.layers.map((layer, index) => (
-          <Layer
-            type={layer.type}
-            content={layer.content}
-            index={index}
-            totalLayers={canvas.layers.length}
-            deleteLayer={deleteLayer}
-            moveLayerUp={moveLayerUp}
-            moveLayerDown={moveLayerDown}
-          />
+          <Grow in={true}>
+            <div className="layer">
+              <Layer
+                type={layer.type}
+                content={layer.content}
+                index={index}
+                totalLayers={canvas.layers.length}
+                deleteLayer={deleteLayer}
+                moveLayerUp={moveLayerUp}
+                moveLayerDown={moveLayerDown}
+              />
+            </div>
+          </Grow>
         ))}
-      <CreateLayer />
     </div>
   );
 }
