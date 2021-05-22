@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Grow } from '@material-ui/core';
+import React, { useState, useContext } from 'react';
+import { motion } from 'framer-motion';
 
 import './ControlPanelStyle.scss';
 import { CanvasContext } from '../../contexts/CanvasContext';
@@ -9,6 +9,7 @@ import CreateLayer from './CreateLayerComponent';
 
 function ControlPanel() {
   const [canvas, setCanvas] = useContext(CanvasContext);
+  const [activeLayer, setActiveLayer] = useState(null);
 
   const deleteLayer = (index) => {
     const newLayers = [...canvas.layers];
@@ -17,6 +18,7 @@ function ControlPanel() {
       ...canvas,
       layers: newLayers,
     });
+    setActiveLayer(null);
   };
 
   const moveLayerUp = (index) => {
@@ -30,6 +32,7 @@ function ControlPanel() {
         ...canvas,
         layers: newLayers,
       });
+      setActiveLayer(index - 1);
     }
   };
 
@@ -44,7 +47,13 @@ function ControlPanel() {
         ...canvas,
         layers: newLayers,
       });
+      setActiveLayer(index + 1);
     }
+  };
+
+  const layerAnim = {
+    initial: { scale: 0, y: 0 },
+    create: { scale: 1 },
   };
 
   return (
@@ -53,19 +62,25 @@ function ControlPanel() {
       <CreateLayer />
       {canvas.layers.length &&
         canvas.layers.map((layer, index) => (
-          <Grow in={true}>
-            <div className="layer">
-              <Layer
-                type={layer.type}
-                content={layer.content}
-                index={index}
-                totalLayers={canvas.layers.length}
-                deleteLayer={deleteLayer}
-                moveLayerUp={moveLayerUp}
-                moveLayerDown={moveLayerDown}
-              />
-            </div>
-          </Grow>
+          <motion.div
+            className="layer"
+            variants={layerAnim}
+            initial="initial"
+            animate="create"
+            key={canvas.layers.length - index}
+          >
+            <Layer
+              type={layer.type}
+              content={layer.content}
+              index={index}
+              totalLayers={canvas.layers.length}
+              deleteLayer={deleteLayer}
+              moveLayerUp={moveLayerUp}
+              moveLayerDown={moveLayerDown}
+              activeLayer={activeLayer}
+              setActiveLayer={setActiveLayer}
+            />
+          </motion.div>
         ))}
     </div>
   );

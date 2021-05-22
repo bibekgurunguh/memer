@@ -25,6 +25,8 @@ function Layer({
   deleteLayer,
   moveLayerUp,
   moveLayerDown,
+  activeLayer,
+  setActiveLayer,
 }) {
   const [isDeleteModalOpen, setDeleteModal] = useState(false);
   const openDeleteModal = () => {
@@ -74,7 +76,10 @@ function Layer({
                 <Button
                   color="secondary"
                   variant="contained"
-                  onClick={() => deleteLayer(index)}
+                  onClick={() => {
+                    deleteLayer(index);
+                    closeDeleteModal();
+                  }}
                 >
                   Delete
                 </Button>
@@ -96,7 +101,12 @@ function Layer({
   return (
     <>
       {type === 'text' ? (
-        <Accordion>
+        <Accordion
+          expanded={activeLayer === index}
+          onChange={() =>
+            activeLayer === index ? setActiveLayer(null) : setActiveLayer(index)
+          }
+        >
           <AccordionSummary>
             <Chip label={type.toUpperCase()} color="primary" /> &nbsp;
             <Chip
