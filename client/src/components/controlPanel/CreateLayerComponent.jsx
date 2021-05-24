@@ -6,24 +6,24 @@ import GradeIcon from '@material-ui/icons/Grade';
 
 import './CreateLayerStyle.scss';
 import { CanvasContext } from '../../contexts/CanvasContext';
-import { newTextLayer } from '../../constants/constants';
+import { newTextLayer, newImageLayer } from '../../constants/constants';
 import { deepCopy } from '../../utils/utilities';
 
 function CreateLayer() {
   const [canvas, setCanvas] = useContext(CanvasContext);
 
-  function handleText() {
-    const newLayers = [deepCopy(newTextLayer), ...canvas.layers];
+  function createLayer(newLayer) {
+    const newLayers = [deepCopy(newLayer), ...canvas.layers];
     setCanvas({ ...canvas, layers: newLayers });
   }
 
   return (
     <div className="createLayerContainer">
-      <div className="createButtons" onClick={handleText}>
+      <div className="createButtons" onClick={() => createLayer(newTextLayer)}>
         <TextFieldsIcon />
         <div className="createButtons__badge">+</div>
       </div>
-      <div className="createButtons">
+      <div className="createButtons" onClick={() => createLayer(newImageLayer)}>
         <ImageIcon />
       </div>
       <div className="createButtons">
