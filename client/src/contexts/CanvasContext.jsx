@@ -25,6 +25,17 @@ export const CanvasProvider = (props) => {
         x: 0,
         y: 0,
       },
+      {
+        type: 'image',
+        content: {
+          path: 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg',
+          border: 4,
+          borderColor: 'yellow',
+          size: 70,
+        },
+        x: 0,
+        y: 0,
+      },
     ],
   });
 

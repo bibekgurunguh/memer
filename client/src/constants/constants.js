@@ -39,3 +39,16 @@ export const newTextLayer = {
   x: 0,
   y: 0,
 };
+
+export const newImageLayer = {
+  type: 'image',
+  content: {
+    path: 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg',
+    border: 1,
+    borderColor: 'yellow',
+    height: 200,
+    width: 300,
+  },
+  x: 0,
+  y: 0,
+};

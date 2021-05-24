@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './LayerStyle.scss';
 import { shortenText } from '../../utils/utilities';
 import TextLayer from './TextLayerComponent';
+import ImageLayer from './ImageLayerComponent';
 
 function Layer({
   type,
@@ -99,31 +100,33 @@ function Layer({
   };
 
   return (
-    <>
-      {type === 'text' ? (
-        <Accordion
-          expanded={activeLayer === index}
-          onChange={() =>
-            activeLayer === index ? setActiveLayer(null) : setActiveLayer(index)
-          }
-        >
-          <AccordionSummary>
-            <Chip label={type.toUpperCase()} color="primary" /> &nbsp;
-            <Chip
-              label={shortenText(content.value)}
-              variant="outlined"
-              disabled
-            />
-          </AccordionSummary>
-          <AccordionDetails style={{ display: 'inline-block' }}>
-            <LayerControllerBar />
-            <TextLayer content={content} index={index} />
-          </AccordionDetails>
-        </Accordion>
-      ) : (
-        <></>
-      )}
-    </>
+    <Accordion
+      expanded={activeLayer === index}
+      onChange={() =>
+        activeLayer === index ? setActiveLayer(null) : setActiveLayer(index)
+      }
+    >
+      <AccordionSummary>
+        <Chip
+          label={type.toUpperCase()}
+          color={type === 'text' ? 'primary' : 'secondary'}
+          variant={type === 'rect' ? 'outlined' : 'default'}
+        />
+        &nbsp;
+        {type === 'text' && (
+          <Chip
+            label={shortenText(content.value)}
+            variant="outlined"
+            disabled
+          />
+        )}
+      </AccordionSummary>
+      <AccordionDetails style={{ display: 'inline-block' }}>
+        <LayerControllerBar />
+        {type === 'text' && <TextLayer content={content} index={index} />}
+        {type === 'image' && <ImageLayer content={content} index={index} />}
+      </AccordionDetails>
+    </Accordion>
   );
 }
 
